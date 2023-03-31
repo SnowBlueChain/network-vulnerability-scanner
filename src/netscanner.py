@@ -2,7 +2,7 @@ import socket
 
 from scapy.all import *
 
-from .ascii_art import GHOST, NAME
+from ascii_art import GHOST, NAME
 
 
 def get_ip() -> str:
