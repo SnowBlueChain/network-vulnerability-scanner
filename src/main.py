@@ -2,6 +2,8 @@ import socket
 
 from scapy.all import *
 
+from .ascii_art import GHOST, NAME
+
 
 def get_ip() -> str:
     try:
@@ -17,30 +19,31 @@ def get_ip() -> str:
 def icmp_trace(ip: str) -> None:
     p = sr1(IP(dst=ip)/ICMP()/Raw(load="Hello World"), timeout=1, verbose=0)
     if not p:
-        print("Host is down")
+        print("\nHost is down")
         exit()
 
-    print("Host is up")
     which_system(ttl=p.ttl)
 
 
 def which_system(ttl: str) -> None:
     if ttl <= 64:
-        print("Linux/Unix")
+        print(f"\nLinux/Unix -> ttl={ttl}\n")
     elif ttl <= 128:
-        print("Windows")
+        print("\nWindows -> ttl={ttl}\n")
     else:
-        print("Unknown")
+        print("\nUnknown\n")
 
 
 def scan_ports(ip: str) -> bool:
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     established = False
 
+    print("PORT\tSTATE")
+
     for port in range(1, 65535):
         try:
             client_socket.connect((ip, port))
-            print(f"{port}/tcp OPEN")
+            print(f"{port}/tcp\topen")
             established = True
         except:
             pass
@@ -49,6 +52,9 @@ def scan_ports(ip: str) -> bool:
 
 
 if __name__ == "__main__":
+    print(GHOST)
+    print(NAME)
+
     ip = get_ip()
     icmp_trace(ip)
     established = scan_ports(ip)
