@@ -22,31 +22,34 @@ def icmp_trace(ip: str) -> None:
         print("\nHost is down")
         exit()
 
+    print("\nHost is up")
     which_system(ttl=p.ttl)
 
 
 def which_system(ttl: str) -> None:
     if ttl <= 64:
-        print(f"\nLinux/Unix -> ttl={ttl}\n")
+        print(f"Linux/Unix -> ttl={ttl}\n")
     elif ttl <= 128:
-        print("\nWindows -> ttl={ttl}\n")
+        print(f"Windows -> ttl={ttl}\n")
     else:
-        print("\nUnknown\n")
+        print("Unknown sytem\n")
 
 
 def scan_ports(ip: str) -> bool:
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     established = False
 
-    print("PORT\tSTATE")
+    print("PORT\t  STATE")
 
     for port in range(1, 65535):
-        try:
-            client_socket.connect((ip, port))
-            print(f"{port}/tcp\topen")
-            established = True
-        except:
-            pass
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
+            try:
+                client_socket.settimeout(0.5)
+                client_socket.connect((ip, port))
+                print(f"{port}/tcp".ljust(9), "open")
+                established = True
+            except:
+                pass
 
     return established
 
