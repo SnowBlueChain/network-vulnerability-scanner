@@ -1,8 +1,10 @@
 import socket
+from platform import system
 
 from scapy.all import *
 
-from ascii_art import GHOST, NAME
+from utils.ascii_art import GHOST, NAME
+from utils.user import admin_check, user_system_check
 
 
 def get_ip() -> str:
@@ -55,6 +57,10 @@ def scan_ports(ip: str) -> bool:
 
 
 if __name__ == "__main__":
+    user_system = system()
+    user_system_check(user_system)
+    admin_check(user_system)
+
     print(GHOST)
     print(NAME)
 
