@@ -3,7 +3,7 @@ from platform import system
 
 from scapy.all import *
 
-from utils.ascii_art import GHOST, NAME
+from utils.ascii_art import ART, NAME
 from utils.user import admin_check, user_system_check
 
 
@@ -61,7 +61,7 @@ if __name__ == "__main__":
     user_system_check(user_system)
     admin_check(user_system)
 
-    print(GHOST)
+    print(ART[random.randint(0, len(ART) - 1)])
     print(NAME)
 
     ip = get_ip()
