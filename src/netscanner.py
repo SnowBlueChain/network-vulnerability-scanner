@@ -1,5 +1,4 @@
 import socket
-from platform import system
 
 from scapy.all import *
 
@@ -20,7 +19,7 @@ def get_ip() -> str:
 
 
 def icmp_trace(ip: str) -> None:
-    p = sr1(IP(dst=ip)/ICMP()/Raw(load="Hello World"), timeout=1, verbose=0)
+    p = sr1(IP(dst=ip) / ICMP() / Raw(load="Hello World"), timeout=1, verbose=0)
     if not p:
         print("\nHost is down")
         exit()
@@ -58,9 +57,8 @@ def scan_ports(ip: str) -> bool:
 
 
 if __name__ == "__main__":
-    user_system = system()
-    user_system_check(user_system)
-    admin_check(user_system)
+    user_system_check()
+    admin_check()
 
     print(ART[random.randint(0, len(ART) - 1)])
     print(NAME)
