@@ -9,7 +9,7 @@ from utils.user import admin_check, user_system_check
 
 def get_ip() -> str:
     try:
-        ip = input("\033[1;33m" + "Enter IPv4: " + "\033[1;35m") #FIXME
+        ip = input("\033[1;33m" + "Enter IPv4: " + "\033[1;35m")
         print("\033[0m", end="")
         socket.inet_aton(ip)
     except socket.error:
