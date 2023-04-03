@@ -1,4 +1,5 @@
 import random
+import socket
 
 from core.ports import scan_ports
 from core.system_discovery import icmp_trace
