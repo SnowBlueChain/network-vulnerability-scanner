@@ -1,7 +1,8 @@
 import random
 import socket
 
-from core.ports import scan_ports
+from core.fuzzing import dir_fuzzer
+from core.ports import open_ports, scan_ports
 from core.system_discovery import icmp_trace
 from utils.ascii_art import ART, NAME
 from utils.user import admin_check, user_system_check
@@ -32,3 +33,14 @@ if __name__ == "__main__":
 
     if not established:
         print(f"{ip} is not listening on any port")
+        exit()
+
+    if 80 and 443 in open_ports:
+        print("HTTP (80) and HTTPS (443) are open")
+        dir_fuzzer(ip, http=True, https=True)
+    elif 80 in open_ports:
+        print("HTTP (80) is open")
+        dir_fuzzer(ip, http=True)
+    elif 443 in open_ports:
+        print("HTTPS (443) is open")
+        dir_fuzzer(ip, https=True)

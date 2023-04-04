@@ -1,5 +1,7 @@
 import socket
 
+open_ports = []
+
 
 def scan_ports(ip: str) -> bool:
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -15,6 +17,7 @@ def scan_ports(ip: str) -> bool:
                     print("PORT\t  STATE")
                     established = True
 
+                open_ports.append(port)
                 print(f"{port}/tcp".ljust(9), "open")
             except:
                 pass
