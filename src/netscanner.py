@@ -1,3 +1,9 @@
+"""Main entry point of the program.
+
+Author:
+    Pablo Dorrio Vazquez (@pablodorrio)
+"""
+
 import random
 import socket
 
@@ -8,7 +14,12 @@ from utils.ascii_art import ART, NAME
 from utils.user import admin_check, user_system_check
 
 
-def get_ip() -> str:
+def target_ip() -> str:
+    """Get the target IPv4 address from the user input.
+
+    Returns:
+        str: The IPv4 address.
+    """
     try:
         ip = input("\033[1;33m" + "Enter IPv4: " + "\033[1;35m")
         print("\033[0m", end="")
@@ -27,7 +38,7 @@ if __name__ == "__main__":
     print(ART[random.randint(0, len(ART) - 1)])
     print(NAME)
 
-    ip = get_ip()
+    ip = target_ip()
     icmp_trace(ip)
     established = scan_ports(ip)
 

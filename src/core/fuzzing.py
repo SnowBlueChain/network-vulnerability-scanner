@@ -1,7 +1,18 @@
+"""Fuzzing module.
+
+Author:
+    Pablo Dorrio Vazquez (@pablodorrio)
+"""
+
 import requests
 
 
-def request_response(url):
+def request_response(url: str) -> None:
+    """Send a request to a URL.
+
+    Args:
+        url (str): URL to send the request.
+    """
     try:
         response = requests.get(url)
         if response.status_code == 200:
@@ -10,7 +21,14 @@ def request_response(url):
         pass
 
 
-def dir_fuzzer(ip, http=False, https=False):
+def dir_fuzzer(ip: str, http: bool = False, https: bool = False) -> None:
+    """Fuzz directories.
+
+    Args:
+        ip (str): IP address to fuzz.
+        http (bool, optional): Use HTTP protocol. Defaults to False.
+        https (bool, optional): Use HTTPS protocol. Defaults to False.
+    """
     print("\nDIRECTORY DISCOVERY")
     dictionary = input("  Enter a path to a wordlist: ")
 

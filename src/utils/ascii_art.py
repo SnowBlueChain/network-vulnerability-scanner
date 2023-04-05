@@ -1,3 +1,9 @@
+"""ASCII art of the program.
+
+Author:
+   Pablo Dorrio Vazquez (@pablodorrio)
+"""
+
 ART = [
     """
       ~ a ghost ~ 9/96

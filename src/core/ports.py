@@ -1,9 +1,23 @@
+"""Open host ports.
+
+Author:
+    Pablo Dorrio Vazquez (@pablodorrio)
+"""
+
 import socket
 
 open_ports = []
 
 
 def scan_ports(ip: str) -> bool:
+    """Scan open ports in a host.
+
+    Args:
+        ip (str): Host IP.
+
+    Returns:
+        bool: True if there are open ports, False otherwise.
+    """
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     established = False
 
