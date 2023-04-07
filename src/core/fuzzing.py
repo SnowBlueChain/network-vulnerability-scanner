@@ -4,6 +4,7 @@ Author:
     Pablo Dorrio Vazquez (@pablodorrio)
 """
 
+import readline
 import requests
 
 
@@ -30,6 +31,8 @@ def dir_fuzzer(ip: str, http: bool = False, https: bool = False) -> None:
         https (bool, optional): Use HTTPS protocol. Defaults to False.
     """
     print("\nDIRECTORY DISCOVERY")
+    readline.set_completer_delims(' \t\n;')
+    readline.parse_and_bind("tab: complete")
     dictionary = input("  Enter a path to a wordlist: ")
 
     with open(dictionary, "r") as wordlist:
