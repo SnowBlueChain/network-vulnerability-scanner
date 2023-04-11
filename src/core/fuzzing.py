@@ -5,6 +5,7 @@ Author:
 """
 
 import readline
+
 import requests
 
 
@@ -31,7 +32,23 @@ def dir_fuzzer(ip: str, http: bool = False, https: bool = False) -> None:
         https (bool, optional): Use HTTPS protocol. Defaults to False.
     """
     print("\nDIRECTORY DISCOVERY")
-    readline.set_completer_delims(' \t\n;')
+
+    if http and https:
+        use_http = use_https = ""
+
+        while use_http != "y" and use_http != "n":
+            use_http = input("Use HTTP? (y/n): ").lower()
+
+            if use_http == "f":
+                http = False
+
+        while use_https != "y" and use_https != "n":
+            use_https = input("Use HTTPS? (y/n): ").lower()
+
+            if use_https == "f":
+                https = False
+
+    readline.set_completer_delims(" \t\n;")
     readline.parse_and_bind("tab: complete")
     dictionary = input("  Enter a path to a wordlist: ")
 
